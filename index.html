@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    @keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(91,91,214,.25); border-radius: 3px; }
+  </style>
+</helmet>
+
+<div style="display:flex;height:100vh;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:14px;color:#111827">
+
+  <!-- SIDEBAR -->
+  <aside style="width:236px;min-width:236px;background:#1E1B4B;display:flex;flex-direction:column;overflow:hidden;flex:none">
+    <div style="padding:18px 14px 14px;border-bottom:1px solid rgba(255,255,255,.08)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:32px;height:32px;background:linear-gradient(135deg,#5B5BD6,#7C3AED);border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:white;line-height:1.2">Intellebox</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.38);letter-spacing:.06em;text-transform:uppercase">CRM</div>
+        </div>
+      </div>
+    </div>
+    <nav style="flex:1;padding:8px;overflow-y:auto;display:flex;flex-direction:column;gap:1px">
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:8px;background:rgba(91,91,214,.5);color:white;cursor:pointer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>
+        <span style="font-size:13px;font-weight:600">Дашборд</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:8px;color:rgba(255,255,255,.52);cursor:pointer" style-hover="background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        <span style="font-size:13px;flex:1">Центр уведомлений</span>
+        <span style="background:#EF4444;color:white;border-radius:8px;padding:1px 6px;font-size:10px;font-weight:700;line-height:1.6">21</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:8px;color:rgba(255,255,255,.52);cursor:pointer" style-hover="background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        <span style="font-size:13px;flex:1">Заявки</span>
+        <span style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.55);border-radius:8px;padding:1px 6px;font-size:10px">246</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:8px;color:rgba(255,255,255,.52);cursor:pointer" style-hover="background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        <span style="font-size:13px;flex:1">ОИС</span>
+        <span style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.55);border-radius:8px;padding:1px 6px;font-size:10px">1 430</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:8px;color:rgba(255,255,255,.52);cursor:pointer" style-hover="background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <span style="font-size:13px;flex:1">Заказы</span>
+        <span style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.55);border-radius:8px;padding:1px 6px;font-size:10px">87</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:8px;color:rgba(255,255,255,.52);cursor:pointer" style-hover="background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+        <span style="font-size:13px;flex:1">Документы</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:8px;color:rgba(255,255,255,.52);cursor:pointer" style-hover="background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+        <span style="font-size:13px;flex:1">Задачи</span>
+        <span style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.55);border-radius:8px;padding:1px 6px;font-size:10px">124</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:8px;color:rgba(255,255,255,.52);cursor:pointer" style-hover="background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span style="font-size:13px">Организации</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:8px;color:rgba(255,255,255,.52);cursor:pointer" style-hover="background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        <span style="font-size:13px">Отчёты</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:8px;color:rgba(255,255,255,.52);cursor:pointer" style-hover="background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span style="font-size:13px">Настройки</span>
+      </div>
+    </nav>
+    <div style="padding:6px 8px 10px;border-top:1px solid rgba(255,255,255,.07)">
+      <div style="display:flex;align-items:center;gap:8px;padding:7px 11px;border-radius:7px;color:rgba(255,255,255,.3);cursor:pointer;font-size:12px" style-hover="color:rgba(255,255,255,.55)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Свернуть меню</span>
+      </div>
+      <div style="padding:0 11px;font-size:10px;color:rgba(255,255,255,.18)">© 2024 Intellebox CRM</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;background:#ECEAF6">
+
+    <!-- TOP BAR -->
+    <header style="height:58px;background:white;border-bottom:1px solid #E8E5F0;display:flex;align-items:center;padding:0 20px;gap:12px;flex:none;box-shadow:0 1px 4px rgba(30,27,75,.05)">
+      <h1 style="font-size:16px;font-weight:700;color:#111827;margin:0;white-space:nowrap;flex:none">Дашборд CRM</h1>
+      <div style="position:relative;flex:1;max-width:340px">
+        <svg style="position:absolute;left:9px;top:50%;transform:translateY(-50%);pointer-events:none" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2.5" strokeLinecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input style="width:100%;height:33px;border:1px solid #E8E5F0;border-radius:8px;padding:0 12px 0 31px;font-size:12px;color:#374151;background:#F8F7FD;outline:none" placeholder="Поиск по заявкам, ОИС, заказам, документам…" />
+      </div>
+      <div style="position:relative;flex:none">
+        <button onClick="{{ togglePeriodDropdown }}" style="display:flex;align-items:center;gap:6px;height:33px;padding:0 10px;border:1px solid #E8E5F0;border-radius:8px;background:white;font-size:12px;color:#374151;cursor:pointer;white-space:nowrap">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2" strokeLinecap="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          {{ periodLabel }}
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2.5" strokeLinecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <sc-if value="{{ showPeriodDropdown }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:calc(100% + 4px);left:0;background:white;border:1px solid #E8E5F0;border-radius:10px;box-shadow:0 8px 24px rgba(30,27,75,.12);z-index:100;min-width:195px;padding:4px">
+            <sc-for list="{{ periodOpts }}" as="opt" hint-placeholder-count="6">
+              <div onClick="{{ opt.onClick }}" style="padding:8px 12px;font-size:13px;border-radius:6px;cursor:pointer;color:#374151" style-hover="background:#F5F3FF;color:#5B5BD6">{{ opt.label }}</div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <div style="display:flex;align-items:center;gap:7px;flex:none">
+        <span style="font-size:11px;color:#9CA3AF">Роль:</span>
+        <div style="display:flex;border:1px solid #E8E5F0;border-radius:8px;overflow:hidden">
+          <button onClick="{{ setAdminRole }}" style="{{ adminBtnStyle }}">Администратор</button>
+          <button onClick="{{ setClientRole }}" style="{{ clientBtnStyle }}">Клиент</button>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:7px;margin-left:auto;flex:none">
+        <button style="width:33px;height:33px;border:1px solid #E8E5F0;border-radius:8px;background:white;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none" style-hover="background:#F5F3FF">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </button>
+        <button style="width:33px;height:33px;border:1px solid #E8E5F0;border-radius:8px;background:white;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;flex:none" style-hover="background:#F5F3FF">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2" strokeLinecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span style="position:absolute;top:-3px;right:-3px;background:#EF4444;color:white;border-radius:9px;font-size:9px;font-weight:700;padding:1px 4px;border:2px solid white;min-width:16px;text-align:center;line-height:1.4">21</span>
+        </button>
+        <div style="display:flex;align-items:center;gap:8px;padding-left:10px;border-left:1px solid #E8E5F0;cursor:pointer">
+          <div style="width:29px;height:29px;border-radius:50%;background:linear-gradient(135deg,#5B5BD6,#7C3AED);display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:700;flex:none">АС</div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#111827;line-height:1.3">Анна Смирнова</div>
+            <div style="font-size:10px;color:#9CA3AF;line-height:1.3">{{ roleLabel }}</div>
+          </div>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2.5" strokeLinecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div style="flex:1;overflow-y:auto;padding:14px 18px 24px">
+
+      <!-- Controls -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:10px;font-size:11px;color:#9CA3AF">
+          <span>Период: <span style="color:#5B5BD6;font-weight:500">{{ periodLabel }}</span></span>
+          <span style="color:#DDD6FE">·</span>
+          <span>Организация: Все</span>
+          <span style="color:#DDD6FE">·</span>
+          <span style="color:#5B5BD6;cursor:pointer" style-hover="text-decoration:underline">Настроить фильтры</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:11px;color:#6B7280;white-space:nowrap">
+            <input type="checkbox" onChange="{{ toggleDemoState }}" style="accent-color:#5B5BD6;cursor:pointer;width:12px;height:12px" />
+            Демо состояний
+          </label>
+          <button style="display:flex;align-items:center;gap:4px;height:28px;padding:0 10px;border:1px solid #E8E5F0;border-radius:7px;background:white;font-size:11px;color:#6B7280;cursor:pointer" style-hover="background:#F5F3FF;color:#5B5BD6">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            Обновить
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI SKELETON -->
+      <sc-if value="{{ isDemoState }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-bottom:12px">
+          <sc-for list="{{ skeletonItems }}" as="s" hint-placeholder-count="6">
+            <div style="background:white;border-radius:11px;padding:15px;border:1px solid #F0EEF8">
+              <div style="height:8px;width:60%;border-radius:3px;background:linear-gradient(90deg,#F0EEF8 25%,#E4E0F4 50%,#F0EEF8 75%);background-size:400px 100%;animation:shimmer 1.5s infinite;margin-bottom:11px"></div>
+              <div style="height:24px;width:45%;border-radius:3px;background:linear-gradient(90deg,#F0EEF8 25%,#E4E0F4 50%,#F0EEF8 75%);background-size:400px 100%;animation:shimmer 1.5s infinite;margin-bottom:9px"></div>
+              <div style="height:7px;width:50%;border-radius:3px;background:linear-gradient(90deg,#F0EEF8 25%,#E4E0F4 50%,#F0EEF8 75%);background-size:400px 100%;animation:shimmer 1.5s infinite"></div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- KPI CARDS -->
+      <sc-if value="{{ isNotDemoState }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-bottom:12px">
+          <sc-for list="{{ kpiCards }}" as="card" hint-placeholder-count="6">
+            <div onClick="{{ card.onClick }}" style="background:white;border-radius:11px;padding:15px;border:1px solid #F0EEF8;cursor:pointer;transition:all .15s" style-hover="box-shadow:0 4px 16px rgba(91,91,214,.13);transform:translateY(-1px)">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:7px">
+                <span style="font-size:10px;font-weight:500;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;line-height:1.4">{{ card.label }}</span>
+                <sc-if value="{{ card.isState }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size:9px;background:#EDE9FE;color:#5B5BD6;border-radius:4px;padding:2px 5px;font-weight:500;white-space:nowrap;flex:none;line-height:1.5">● статус</span>
+                </sc-if>
+              </div>
+              <div style="font-size:26px;font-weight:700;color:#111827;line-height:1;margin-bottom:5px;letter-spacing:-.5px">{{ card.value }}</div>
+              <div style="display:flex;align-items:center;gap:3px">
+                <span style="{{ card.deltaStyle }}">{{ card.delta }}</span>
+                <span style="font-size:10px;color:#C4B5FD">({{ card.deltaPercent }})</span>
+              </div>
+              <sc-if value="{{ card.isState }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:9px;color:#DDD6FE;margin-top:3px">Не зависит от периода</div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- ROW 1: ATTENTION + RISKS -->
+      <div style="display:grid;grid-template-columns:7fr 5fr;gap:9px;margin-bottom:9px">
+
+        <div style="background:white;border-radius:11px;padding:16px 18px;border:1px solid #F0EEF8">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:13px">
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#111827">Требует внимания</div>
+              <div style="font-size:11px;color:#9CA3AF;margin-top:2px">Краткая сводка из центра уведомлений</div>
+            </div>
+            <span style="background:#FEF2F2;color:#EF4444;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;white-space:nowrap;flex:none">7 просрочено</span>
+          </div>
+          <sc-if value="{{ isDemoState }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:28px 0;text-align:center">
+              <div style="width:42px;height:42px;border-radius:12px;background:#F0FDF4;margin:0 auto 10px;display:flex;align-items:center;justify-content:center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div style="font-size:14px;font-weight:600;color:#111827;margin-bottom:3px">Нет просроченных задач</div>
+              <div style="font-size:12px;color:#9CA3AF">Все задачи выполняются в срок — пустое состояние блока</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isNotDemoState }}" hint-placeholder-val="{{ true }}">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:13px">
+              <sc-for list="{{ attentionItems }}" as="item" hint-placeholder-count="5">
+                <div onClick="{{ item.onClick }}" style="display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:8px;background:#FAFAFA;cursor:pointer;border:1px solid #F3F0FA;transition:all .12s" style-hover="background:#F5F3FF;border-color:#DDD6FE">
+                  <div style="width:7px;height:7px;border-radius:50%;flex:none;background:{{ item.dotColor }}"></div>
+                  <span style="flex:1;font-size:11px;color:#374151;line-height:1.3">{{ item.label }}</span>
+                  <span style="color:white;border-radius:9px;padding:2px 7px;font-size:10px;font-weight:700;flex:none;background:{{ item.badgeColor }}">{{ item.count }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <button onClick="{{ goToNotifications }}" style="width:100%;height:34px;background:#5B5BD6;color:white;border:none;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px" style-hover="background:#4338CA">
+            Перейти в центр уведомлений
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </div>
+
+        <sc-if value="{{ showRisks }}" hint-placeholder-val="{{ true }}">
+          <div style="background:white;border-radius:11px;padding:16px 18px;border:1px solid #F0EEF8">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px">
+              <div style="font-size:14px;font-weight:600;color:#111827">Риски</div>
+              <span onClick="{{ openAllRisks }}" style="font-size:11px;color:#5B5BD6;cursor:pointer" style-hover="text-decoration:underline">Открыть список</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <sc-for list="{{ riskItems }}" as="risk" hint-placeholder-count="5">
+                <div onClick="{{ risk.onClick }}" style="display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:7px;cursor:pointer" style-hover="background:#F9F7FF">
+                  <span style="flex:1;font-size:12px;color:#374151;line-height:1.3">{{ risk.label }}</span>
+                  <div style="width:56px;height:4px;border-radius:2px;background:#F3F0FA;flex:none">
+                    <div style="width:{{ risk.barWidth }};height:100%;border-radius:2px;background:{{ risk.color }}"></div>
+                  </div>
+                  <span style="font-size:14px;font-weight:700;min-width:18px;text-align:right;color:{{ risk.color }}">{{ risk.count }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isClient }}" hint-placeholder-val="{{ false }}">
+          <div style="border-radius:11px;padding:16px 18px;border:2px dashed #DDD6FE;background:#F8F6FF;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:7px">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C4B5FD" strokeWidth="1.5" strokeLinecap="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <div style="font-size:13px;font-weight:500;color:#9CA3AF">Раздел недоступен</div>
+            <div style="font-size:11px;color:#C4B5FD;line-height:1.4">Блок «Риски» доступен только внутренним сотрудникам</div>
+          </div>
+        </sc-if>
+
+      </div>
+
+      <!-- ROW 2: APPS + OIS + DOCS -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:9px">
+
+        <div style="background:white;border-radius:11px;padding:16px 18px;border:1px solid #F0EEF8">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px">
+            <div style="font-size:14px;font-weight:600;color:#111827">Заявки</div>
+            <span onClick="{{ openAllApps }}" style="font-size:11px;color:#5B5BD6;cursor:pointer" style-hover="text-decoration:underline">Открыть список</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <svg viewBox="0 0 160 160" width="110" height="110" style="flex:none">
+              <sc-for list="{{ donutSegments }}" as="seg" hint-placeholder-count="6">
+                <path d="{{ seg.pathD }}" fill="{{ seg.color }}" stroke="white" strokeWidth="2" style="cursor:pointer" onClick="{{ seg.onClick }}" style-hover="opacity:.82"></path>
+              </sc-for>
+              <circle cx="80" cy="80" r="43" fill="white"></circle>
+              <text x="80" y="76" textAnchor="middle" fontSize="20" fontWeight="700" fill="#111827">219</text>
+              <text x="80" y="91" textAnchor="middle" fontSize="10" fill="#9CA3AF">Всего</text>
+            </svg>
+            <div style="flex:1;display:flex;flex-direction:column;gap:3px;min-width:0">
+              <sc-for list="{{ donutSegments }}" as="seg" hint-placeholder-count="6">
+                <div onClick="{{ seg.onClick }}" style="display:flex;align-items:center;gap:5px;cursor:pointer;padding:2px 3px;border-radius:4px" style-hover="background:#F5F3FF">
+                  <div style="width:8px;height:8px;border-radius:2px;flex:none;background:{{ seg.color }}"></div>
+                  <span style="flex:1;font-size:10px;color:#6B7280;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ seg.label }}</span>
+                  <span style="font-size:11px;font-weight:600;color:#374151">{{ seg.value }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:white;border-radius:11px;padding:16px 18px;border:1px solid #F0EEF8">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div style="font-size:14px;font-weight:600;color:#111827">ОИС и продления</div>
+            <span onClick="{{ openAllOIS }}" style="font-size:11px;color:#5B5BD6;cursor:pointer" style-hover="text-decoration:underline">Открыть список</span>
+          </div>
+          <div style="margin-bottom:10px">
+            <div style="font-size:10px;color:#9CA3AF;margin-bottom:4px">Динамика портфеля</div>
+            <svg viewBox="0 0 200 52" width="100%" height="48" style="display:block;overflow:visible">
+              <defs>
+                <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#5B5BD6" stopOpacity=".18"></stop>
+                  <stop offset="100%" stopColor="#5B5BD6" stopOpacity="0"></stop>
+                </linearGradient>
+              </defs>
+              <polygon points="{{ sparklineAreaPoints }}" fill="url(#sg)"></polygon>
+              <polyline points="{{ sparklinePoints }}" fill="none" stroke="#5B5BD6" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"></polyline>
+            </svg>
+            <div style="display:flex;justify-content:space-between;font-size:9px;color:#C4B5FD;margin-top:1px">
+              <span>22 апр</span><span>29 апр</span><span>6 май</span><span>13 май</span><span>20 май</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <sc-for list="{{ oisTiles }}" as="tile" hint-placeholder-count="4">
+              <div onClick="{{ tile.onClick }}" style="padding:9px 10px;border-radius:8px;cursor:pointer;background:{{ tile.bg }};border:1px solid {{ tile.border }}" style-hover="opacity:.85">
+                <div style="font-size:9px;font-weight:500;line-height:1.3;margin-bottom:3px;color:{{ tile.color }}">{{ tile.label }}</div>
+                <div style="font-size:20px;font-weight:700;color:{{ tile.color }}">{{ tile.value }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:white;border-radius:11px;padding:16px 18px;border:1px solid #F0EEF8">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <div style="font-size:14px;font-weight:600;color:#111827">Контроль документов</div>
+            <span onClick="{{ openAllDocs }}" style="font-size:11px;color:#5B5BD6;cursor:pointer" style-hover="text-decoration:underline">Открыть список</span>
+          </div>
+          <div style="display:flex;flex-direction:column">
+            <sc-for list="{{ docItems }}" as="item" hint-placeholder-count="5">
+              <div onClick="{{ item.onClick }}" style="display:flex;align-items:center;justify-content:space-between;padding:8px 6px;border-radius:5px;cursor:pointer;margin:0 -6px" style-hover="background:#F8F6FF">
+                <div style="display:flex;align-items:center;gap:7px;flex:1;min-width:0">
+                  <div style="width:6px;height:6px;border-radius:50%;flex:none;background:{{ item.dotColor }}"></div>
+                  <span style="font-size:12px;color:#374151;line-height:1.3">{{ item.label }}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;flex:none">
+                  <span style="font-size:15px;font-weight:700;color:{{ item.dotColor }}">{{ item.count }}</span>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#C4B5FD" strokeWidth="2.5" strokeLinecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ROW 3: QUALITY + FUTURE -->
+      <sc-if value="{{ showQuality }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:5fr 7fr;gap:9px;margin-bottom:9px">
+          <div style="background:white;border-radius:11px;padding:16px 18px;border:1px solid #F0EEF8">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+              <div style="font-size:14px;font-weight:600;color:#111827">Качество данных</div>
+              <span onClick="{{ openAllQuality }}" style="font-size:11px;color:#5B5BD6;cursor:pointer" style-hover="text-decoration:underline">Открыть список</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <sc-for list="{{ qualityItems }}" as="item" hint-placeholder-count="4">
+                <div onClick="{{ item.onClick }}" style="display:flex;align-items:center;gap:9px;padding:8px 7px;border-radius:7px;cursor:pointer" style-hover="background:#F9F7FF">
+                  <span style="flex:1;font-size:12px;color:#374151;line-height:1.3">{{ item.label }}</span>
+                  <div style="width:72px;height:4px;border-radius:2px;background:#F3F0FA;flex:none">
+                    <div style="width:{{ item.barWidth }};height:100%;border-radius:2px;background:{{ item.color }}"></div>
+                  </div>
+                  <span style="font-size:14px;font-weight:600;color:#374151;min-width:18px;text-align:right">{{ item.count }}</span>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#C4B5FD" strokeWidth="2.5" strokeLinecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="border-radius:11px;padding:16px 18px;border:2px dashed #DDD6FE;background:linear-gradient(135deg,#FAFAFE,#F5F3FF)">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:13px">
+              <div style="font-size:13px;font-weight:600;color:#8B5CF6">Блоки 2-й очереди</div>
+              <span style="background:#EDE9FE;color:#7C3AED;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:600">В разработке</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px">
+              <div style="padding:13px;border-radius:9px;background:white;border:1px solid #EDE9FE;opacity:.72">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="1.8" strokeLinecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <div style="font-size:13px;font-weight:600;color:#374151;margin-top:7px">Заказы</div>
+                <div style="font-size:11px;color:#9CA3AF;margin-top:3px;line-height:1.4">Разрывы в цепочке заказ–заявка–ОИС</div>
+              </div>
+              <div style="padding:13px;border-radius:9px;background:white;border:1px solid #EDE9FE;opacity:.72">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="1.8" strokeLinecap="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                <div style="font-size:13px;font-weight:600;color:#374151;margin-top:7px">Финансы</div>
+                <div style="font-size:11px;color:#9CA3AF;margin-top:3px;line-height:1.4">Счета, акты, пошлины без привязки</div>
+              </div>
+              <div style="padding:13px;border-radius:9px;background:white;border:1px solid #EDE9FE;opacity:.72">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="1.8" strokeLinecap="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                <div style="font-size:13px;font-weight:600;color:#374151;margin-top:7px">Синхронизация</div>
+                <div style="font-size:11px;color:#9CA3AF;margin-top:3px;line-height:1.4">Ошибки и статусы АРМ Роспатента</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isClient }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#F8F6FF;border-radius:11px;padding:13px 16px;border:2px dashed #DDD6FE;display:flex;align-items:center;gap:10px;margin-bottom:9px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4B5FD" strokeWidth="1.5" strokeLinecap="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span style="font-size:12px;color:#9CA3AF">Блоки «Качество данных» и «Риски» доступны только внутренним сотрудникам</span>
+        </div>
+      </sc-if>
+
+      <!-- ROW 4: TEAM -->
+      <sc-if value="{{ showTeam }}" hint-placeholder-val="{{ true }}">
+        <div style="background:white;border-radius:11px;padding:16px 18px;border:1px solid #F0EEF8">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+            <div style="font-size:14px;font-weight:600;color:#111827">Загрузка команды</div>
+            <span onClick="{{ openAllTeam }}" style="font-size:11px;color:#5B5BD6;cursor:pointer" style-hover="text-decoration:underline">Открыть список</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 64px 180px 220px;padding:0 8px 8px;border-bottom:1px solid #F3F0FA;gap:8px">
+            <div style="font-size:10px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:.05em">Сотрудник</div>
+            <div style="font-size:10px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:.05em;text-align:right">Задач</div>
+            <div style="font-size:10px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:.05em">Статус</div>
+            <div style="font-size:10px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:.05em">Выполнение</div>
+          </div>
+          <sc-for list="{{ teamRows }}" as="row" hint-placeholder-count="5">
+            <div onClick="{{ row.onClick }}" style="display:grid;grid-template-columns:1fr 64px 180px 220px;padding:10px 8px;border-radius:8px;cursor:pointer;align-items:center;gap:8px;border-bottom:1px solid #FAFAFA" style-hover="background:#F9F7FF">
+              <div style="display:flex;align-items:center;gap:9px">
+                <div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:700;flex:none;background:{{ row.avatarBg }}">{{ row.initials }}</div>
+                <span style="font-size:13px;font-weight:500;color:#111827">{{ row.name }}</span>
+              </div>
+              <div style="font-size:16px;font-weight:700;color:#111827;text-align:right">{{ row.total }}</div>
+              <div style="display:flex;align-items:center;gap:5px">
+                <span style="width:7px;height:7px;border-radius:50%;flex:none;background:{{ row.issueColor }}"></span>
+                <span style="font-size:13px;font-weight:600;color:#374151">{{ row.issue }}</span>
+                <span style="font-size:11px;color:#9CA3AF">{{ row.issueLabel }}</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px">
+                <div style="flex:1;height:5px;border-radius:3px;background:#F3F0FA">
+                  <div style="width:{{ row.progressWidth }};height:100%;border-radius:3px;background:{{ row.progressColor }}"></div>
+                </div>
+                <span style="font-size:12px;font-weight:600;color:#374151;min-width:32px;text-align:right">{{ row.percent }}%</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <div style="height:6px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERLAY -->
+<sc-if value="{{ showOverlay }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeOverlay }}" style="position:fixed;inset:0;background:rgba(17,24,39,.42);z-index:500;display:flex;align-items:center;justify-content:center;animation:fadeIn .15s ease">
+    <div onClick="{{ stopProp }}" style="background:white;border-radius:16px;padding:32px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(30,27,75,.22);animation:fadeIn .18s ease">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+        <div style="width:38px;height:38px;border-radius:10px;background:#EDE9FE;display:flex;align-items:center;justify-content:center;flex:none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B5BD6" strokeWidth="2.2" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:10px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:.06em">Переход в раздел</div>
+          <div style="font-size:19px;font-weight:700;color:#111827;margin-top:2px">{{ overlaySection }}</div>
+        </div>
+        <button onClick="{{ closeOverlay }}" style="width:28px;height:28px;border:1px solid #E8E5F0;border-radius:7px;background:white;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none" style-hover="background:#F5F3FF">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div style="background:#F8F6FF;border:1px solid #EDE9FE;border-radius:9px;padding:12px 14px;margin-bottom:16px">
+        <div style="font-size:10px;color:#9CA3AF;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Применяемый фильтр</div>
+        <div style="font-size:14px;font-weight:600;color:#5B5BD6">{{ overlayFilter }}</div>
+      </div>
+      <div style="font-size:12px;color:#6B7280;line-height:1.6;margin-bottom:20px">В рабочей системе этот клик открыл бы раздел <strong style="color:#374151">«{{ overlaySection }}»</strong> с уже применённым фильтром. Пользователь сразу видит нужный список.</div>
+      <button onClick="{{ closeOverlay }}" style="width:100%;height:40px;background:#5B5BD6;color:white;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer" style-hover="background:#4338CA">Понятно</button>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = {
+    period: '30',
+    userRole: 'admin',
+    isDemoState: false,
+    showOverlay: false,
+    overlaySection: '',
+    overlayFilter: '',
+    showPeriodDropdown: false,
+  };
+
+  periodOptions = [
+    { value: 'today', label: 'Сегодня' },
+    { value: '7', label: 'Последние 7 дней' },
+    { value: '30', label: 'Последние 30 дней' },
+    { value: '90', label: 'Последние 90 дней' },
+    { value: 'month', label: 'Текущий месяц' },
+    { value: 'quarter', label: 'Текущий квартал' },
+  ];
+
+  periodDeltas = {
+    'today': [
+      { delta: '+3', pct: '1.2%', up: true },
+      { delta: '—', pct: '0%', up: true },
+      { delta: '+1', pct: '1.2%', up: true },
+      { delta: '—', pct: '0%', up: true },
+      { delta: '-1', pct: '1.6%', up: false },
+      { delta: '+2', pct: '10.5%', up: true },
+    ],
+    '7': [
+      { delta: '+8', pct: '3.4%', up: true },
+      { delta: '—', pct: '0%', up: true },
+      { delta: '+3', pct: '3.6%', up: true },
+      { delta: '—', pct: '0%', up: true },
+      { delta: '-2', pct: '3.1%', up: false },
+      { delta: '+3', pct: '16.7%', up: true },
+    ],
+    '30': [
+      { delta: '+18', pct: '7.9%', up: true },
+      { delta: '+92', pct: '6.9%', up: true },
+      { delta: '+6', pct: '7.4%', up: true },
+      { delta: '+12', pct: '10.7%', up: true },
+      { delta: '-5', pct: '7.4%', up: false },
+      { delta: '+6', pct: '40%', up: true },
+    ],
+    '90': [
+      { delta: '+41', pct: '20%', up: true },
+      { delta: '+92', pct: '6.9%', up: true },
+      { delta: '+15', pct: '20.8%', up: true },
+      { delta: '+28', pct: '29.2%', up: true },
+      { delta: '+7', pct: '12.5%', up: true },
+      { delta: '+14', pct: '200%', up: true },
+    ],
+    'month': [
+      { delta: '+22', pct: '9.8%', up: true },
+      { delta: '+92', pct: '6.9%', up: true },
+      { delta: '+8', pct: '10.1%', up: true },
+      { delta: '+15', pct: '13.8%', up: true },
+      { delta: '-3', pct: '4.5%', up: false },
+      { delta: '+8', pct: '61.5%', up: true },
+    ],
+    'quarter': [
+      { delta: '+56', pct: '29.5%', up: true },
+      { delta: '+92', pct: '6.9%', up: true },
+      { delta: '+19', pct: '27.9%', up: true },
+      { delta: '+37', pct: '42.5%', up: true },
+      { delta: '+12', pct: '23.5%', up: true },
+      { delta: '+19', pct: '950%', up: true },
+    ],
+  };
+
+  kpiBase = [
+    { label: 'Активные заявки', value: 246, isState: false, section: 'Заявки', filter: 'Активные', negativeUp: false },
+    { label: 'Активные ОИС', value: 1430, isState: true, section: 'ОИС', filter: 'Активные', negativeUp: false },
+    { label: 'Открытые заказы', value: 87, isState: false, section: 'Заказы', filter: 'Открытые', negativeUp: false },
+    { label: 'Открытые задачи', value: 124, isState: true, section: 'Задачи', filter: 'Открытые', negativeUp: true },
+    { label: 'Документы в работе', value: 63, isState: false, section: 'Документы', filter: 'В работе', negativeUp: false },
+    { label: 'Необраб. уведомления', value: 21, isState: false, section: 'Центр уведомлений', filter: 'Необработанные', negativeUp: true },
+  ];
+
+  attentionData = [
+    { label: '7 просроченных задач', count: 7, section: 'Задачи', filter: 'Просрочены', dotColor: '#EF4444', badgeColor: '#EF4444' },
+    { label: '3 входящих документа без задачи', count: 3, section: 'Документы', filter: 'Входящие без задачи', dotColor: '#F97316', badgeColor: '#F97316' },
+    { label: '5 ОИС истекают в ближ. 90 дней', count: 5, section: 'ОИС', filter: 'Истекают через 90 дней', dotColor: '#F59E0B', badgeColor: '#F59E0B' },
+    { label: '2 заказа без ответственного', count: 2, section: 'Заказы', filter: 'Без ответственного', dotColor: '#F59E0B', badgeColor: '#F59E0B' },
+    { label: '4 заявки без обновления >14 дней', count: 4, section: 'Заявки', filter: 'Без обновления 14 дней', dotColor: '#9CA3AF', badgeColor: '#9CA3AF' },
+  ];
+
+  riskData = [
+    { label: 'Заявки без ответственного', count: 6, maxCount: 14, section: 'Заявки', filter: 'Без ответственного', level: 'critical' },
+    { label: 'Документы без связей', count: 12, maxCount: 14, section: 'Документы', filter: 'Без связей', level: 'high' },
+    { label: 'ОИС без задачи на продление', count: 9, maxCount: 14, section: 'ОИС', filter: 'Без задачи на продление', level: 'medium' },
+    { label: 'Задачи без срока', count: 14, maxCount: 14, section: 'Задачи', filter: 'Без срока', level: 'medium' },
+    { label: 'Заказы без ответственного', count: 2, maxCount: 14, section: 'Заказы', filter: 'Без ответственного', level: 'low' },
+  ];
+
+  appData = [
+    { label: 'Подано', value: 58, color: '#818CF8' },
+    { label: 'Экспертиза', value: 74, color: '#5B5BD6' },
+    { label: 'Запрос/уведомление', value: 21, color: '#F59E0B' },
+    { label: 'Ожидает ответа', value: 16, color: '#94A3B8' },
+    { label: 'Регистрация', value: 43, color: '#10B981' },
+    { label: 'Отказ', value: 7, color: '#EF4444' },
+  ];
+
+  oisData = [
+    { label: '30 дней', value: '3', section: 'ОИС', filter: 'Срок до 30 дней', color: '#EF4444', bg: '#FEF2F2', border: '#FECACA' },
+    { label: '60 дней', value: '7', section: 'ОИС', filter: 'Срок до 60 дней', color: '#F97316', bg: '#FFF7ED', border: '#FED7AA' },
+    { label: '90 дней', value: '12', section: 'ОИС', filter: 'Срок до 90 дней', color: '#F59E0B', bg: '#FFFBEB', border: '#FDE68A' },
+    { label: 'Без заявки', value: '4', section: 'ОИС', filter: 'Без заявки', color: '#5B5BD6', bg: '#F5F3FF', border: '#EDE9FE' },
+  ];
+
+  docData = [
+    { label: 'Входящие от Роспатента', count: 11, section: 'Документы', filter: 'Входящие, Роспатент', dotColor: '#5B5BD6' },
+    { label: 'Без задачи', count: 8, section: 'Документы', filter: 'Без задачи', dotColor: '#F97316' },
+    { label: 'Без связи', count: 12, section: 'Документы', filter: 'Без связей', dotColor: '#EF4444' },
+    { label: 'Ошибки формирования', count: 3, section: 'Документы', filter: 'Ошибки формирования', dotColor: '#EF4444' },
+    { label: 'Пошлины без номера заявки', count: 2, section: 'Документы', filter: 'Пошлины без номера', dotColor: '#F59E0B' },
+  ];
+
+  qualityData = [
+    { label: 'Неполные карточки', count: 15, maxCount: 18, section: 'Заявки', filter: 'Неполные карточки', color: '#EF4444' },
+    { label: 'Нет связей', count: 18, maxCount: 18, section: 'Заявки', filter: 'Без связей', color: '#F97316' },
+    { label: 'Нет ответственного', count: 5, maxCount: 18, section: 'Задачи', filter: 'Без ответственного', color: '#F59E0B' },
+    { label: 'Данные не обновлялись >30 дней', count: 9, maxCount: 18, section: 'Заявки', filter: 'Без обновления 30 дней', color: '#94A3B8' },
+  ];
+
+  teamData = [
+    { name: 'Иза', initials: 'ИЗ', total: 18, issue: 2, issueLabel: 'просрочено', issueType: 'overdue', percent: 89, avatarBg: '#5B5BD6' },
+    { name: 'Лиза', initials: 'ЛИ', total: 31, issue: 8, issueLabel: 'просрочено', issueType: 'overdue', percent: 74, avatarBg: '#7C3AED' },
+    { name: 'Даниил', initials: 'ДА', total: 12, issue: 4, issueLabel: 'зависли', issueType: 'stuck', percent: 68, avatarBg: '#2563EB' },
+    { name: 'Иван', initials: 'ИВ', total: 9, issue: 3, issueLabel: 'ожидают проверки', issueType: 'review', percent: 62, avatarBg: '#0891B2' },
+    { name: 'Егор', initials: 'ЕГ', total: 14, issue: 1, issueLabel: 'просрочено', issueType: 'overdue', percent: 81, avatarBg: '#059669' },
+  ];
+
+  sparkValues = [1412, 1418, 1422, 1425, 1430];
+  levelColors = { critical: '#EF4444', high: '#F97316', medium: '#F59E0B', low: '#10B981' };
+  issueColors = { overdue: '#EF4444', stuck: '#F59E0B', review: '#3B82F6' };
+
+  openOverlay(section, filter) {
+    this.setState({ showOverlay: true, overlaySection: section, overlayFilter: filter });
+  }
+
+  closeOverlay() {
+    this.setState({ showOverlay: false });
+  }
+
+  setPeriod(p) {
+    this.setState({ period: p, showPeriodDropdown: false });
+  }
+
+  togglePeriodDropdown() {
+    this.setState(function(s) { return { showPeriodDropdown: !s.showPeriodDropdown }; });
+  }
+
+  setRole(r) {
+    this.setState({ userRole: r });
+  }
+
+  toggleDemoState() {
+    this.setState(function(s) { return { isDemoState: !s.isDemoState }; });
+  }
+
+  buildDonut(data, cx, cy, outerR, innerR) {
+    var total = 0;
+    for (var i = 0; i < data.length; i++) { total += data[i].value; }
+    var start = -Math.PI / 2;
+    var result = [];
+    for (var j = 0; j < data.length; j++) {
+      var d = data[j];
+      var frac = d.value / total;
+      var sweep = frac * 2 * Math.PI * 0.997;
+      var end = start + sweep;
+      var x0o = cx + outerR * Math.cos(start), y0o = cy + outerR * Math.sin(start);
+      var x1o = cx + outerR * Math.cos(end), y1o = cy + outerR * Math.sin(end);
+      var x0i = cx + innerR * Math.cos(start), y0i = cy + innerR * Math.sin(start);
+      var x1i = cx + innerR * Math.cos(end), y1i = cy + innerR * Math.sin(end);
+      var lg = sweep > Math.PI ? 1 : 0;
+      var path = 'M' + x0o + ' ' + y0o + ' A' + outerR + ' ' + outerR + ' 0 ' + lg + ' 1 ' + x1o + ' ' + y1o + ' L' + x1i + ' ' + y1i + ' A' + innerR + ' ' + innerR + ' 0 ' + lg + ' 0 ' + x0i + ' ' + y0i + 'Z';
+      var seg = {};
+      for (var k in d) { seg[k] = d[k]; }
+      seg.pathD = path;
+      result.push(seg);
+      start += frac * 2 * Math.PI;
+    }
+    return result;
+  }
+
+  buildSparkline(values, w, h) {
+    var min = values[0], max = values[0];
+    for (var i = 1; i < values.length; i++) {
+      if (values[i] < min) min = values[i];
+      if (values[i] > max) max = values[i];
+    }
+    var range = max - min || 1;
+    var pts = [];
+    for (var j = 0; j < values.length; j++) {
+      var x = (j / (values.length - 1)) * w;
+      var y = h - ((values[j] - min) / range) * h * 0.82 - h * 0.09;
+      pts.push(Math.round(x * 10) / 10 + ',' + Math.round(y * 10) / 10);
+    }
+    return pts.join(' ');
+  }
+
+  renderVals() {
+    var s = this.state;
+    var period = s.period;
+    var userRole = s.userRole;
+    var isDemoState = s.isDemoState;
+    var isAdmin = userRole === 'admin';
+    var isClient = userRole === 'client';
+    var self = this;
+
+    function open(section, filter) {
+      return function() { self.openOverlay(section, filter); };
+    }
+
+    var periodOpt = null;
+    for (var pi = 0; pi < this.periodOptions.length; pi++) {
+      if (this.periodOptions[pi].value === period) { periodOpt = this.periodOptions[pi]; break; }
+    }
+    var periodLabel = periodOpt ? periodOpt.label : 'Последние 30 дней';
+    var deltas = this.periodDeltas[period] || this.periodDeltas['30'];
+
+    var kpiCards = this.kpiBase.map(function(k, i) {
+      var d = deltas[i];
+      var isRed = (k.negativeUp && d.up) || (!k.negativeUp && !d.up);
+      var obj = {};
+      for (var key in k) { obj[key] = k[key]; }
+      obj.delta = d.delta;
+      obj.deltaPercent = d.pct;
+      obj.deltaStyle = { color: isRed ? '#EF4444' : '#10B981', fontWeight: '600', fontSize: '11px' };
+      obj.onClick = open(k.section, k.filter);
+      return obj;
+    });
+
+    var attentionItems = this.attentionData.map(function(item) {
+      var obj = {};
+      for (var key in item) { obj[key] = item[key]; }
+      obj.onClick = open(item.section, item.filter);
+      return obj;
+    });
+
+    var self2 = this;
+    var riskItems = this.riskData.map(function(item) {
+      var obj = {};
+      for (var key in item) { obj[key] = item[key]; }
+      obj.color = self2.levelColors[item.level];
+      obj.barWidth = Math.round((item.count / item.maxCount) * 100) + '%';
+      obj.onClick = open(item.section, item.filter);
+      return obj;
+    });
+
+    var donutSegments = this.buildDonut(this.appData, 80, 80, 74, 45).map(function(seg) {
+      var obj = {};
+      for (var key in seg) { obj[key] = seg[key]; }
+      obj.onClick = open('Заявки', 'Статус: ' + seg.label);
+      return obj;
+    });
+
+    var sparkPts = this.buildSparkline(this.sparkValues, 200, 52);
+    var sparklineAreaPoints = '0,52 ' + sparkPts + ' 200,52';
+
+    var oisTiles = this.oisData.map(function(t) {
+      var obj = {};
+      for (var key in t) { obj[key] = t[key]; }
+      obj.onClick = open(t.section, t.filter);
+      return obj;
+    });
+
+    var docItems = this.docData.map(function(item) {
+      var obj = {};
+      for (var key in item) { obj[key] = item[key]; }
+      obj.onClick = open(item.section, item.filter);
+      return obj;
+    });
+
+    var qualityItems = this.qualityData.map(function(item) {
+      var obj = {};
+      for (var key in item) { obj[key] = item[key]; }
+      obj.barWidth = Math.round((item.count / item.maxCount) * 100) + '%';
+      obj.onClick = open(item.section, item.filter);
+      return obj;
+    });
+
+    var self3 = this;
+    var teamRows = this.teamData.map(function(row) {
+      var obj = {};
+      for (var key in row) { obj[key] = row[key]; }
+      obj.issueColor = self3.issueColors[row.issueType] || '#6B7280';
+      obj.progressWidth = row.percent + '%';
+      obj.progressColor = row.percent >= 80 ? '#10B981' : row.percent >= 65 ? '#F59E0B' : '#EF4444';
+      obj.onClick = open('Задачи', 'Исполнитель: ' + row.name);
+      return obj;
+    });
+
+    var periodOpts = this.periodOptions.map(function(p) {
+      var obj = {};
+      for (var key in p) { obj[key] = p[key]; }
+      obj.onClick = function() { self.setPeriod(p.value); };
+      return obj;
+    });
+
+    var adminBtnStyle = { padding: '5px 10px', fontSize: '12px', border: 'none', cursor: 'pointer', background: isAdmin ? '#5B5BD6' : 'white', color: isAdmin ? 'white' : '#6B7280', fontWeight: isAdmin ? '600' : '400' };
+    var clientBtnStyle = { padding: '5px 10px', fontSize: '12px', border: 'none', cursor: 'pointer', borderLeft: '1px solid #E8E5F0', background: isClient ? '#5B5BD6' : 'white', color: isClient ? 'white' : '#6B7280', fontWeight: isClient ? '600' : '400' };
+
+    return {
+      isDemoState: isDemoState,
+      isNotDemoState: !isDemoState,
+      showOverlay: s.showOverlay,
+      overlaySection: s.overlaySection,
+      overlayFilter: s.overlayFilter,
+      showPeriodDropdown: s.showPeriodDropdown,
+      periodLabel: periodLabel,
+      roleLabel: isAdmin ? 'Администратор' : 'Клиент',
+      isAdmin: isAdmin,
+      isClient: isClient,
+      showRisks: isAdmin,
+      showTeam: isAdmin,
+      showQuality: isAdmin,
+      kpiCards: kpiCards,
+      skeletonItems: [1, 2, 3, 4, 5, 6],
+      attentionItems: attentionItems,
+      riskItems: riskItems,
+      donutSegments: donutSegments,
+      sparklinePoints: sparkPts,
+      sparklineAreaPoints: sparklineAreaPoints,
+      oisTiles: oisTiles,
+      docItems: docItems,
+      qualityItems: qualityItems,
+      teamRows: teamRows,
+      periodOpts: periodOpts,
+      adminBtnStyle: adminBtnStyle,
+      clientBtnStyle: clientBtnStyle,
+      closeOverlay: function() { self.closeOverlay(); },
+      stopProp: function(e) { e.stopPropagation(); },
+      togglePeriodDropdown: function() { self.togglePeriodDropdown(); },
+      setAdminRole: function() { self.setRole('admin'); },
+      setClientRole: function() { self.setRole('client'); },
+      toggleDemoState: function() { self.toggleDemoState(); },
+      goToNotifications: open('Центр уведомлений', 'Необработанные'),
+      openAllRisks: open('Риски', 'Все'),
+      openAllApps: open('Заявки', 'Все активные'),
+      openAllOIS: open('ОИС', 'Все активные'),
+      openAllDocs: open('Документы', 'Все документы'),
+      openAllQuality: open('Качество данных', 'Все проблемные'),
+      openAllTeam: open('Задачи', 'По сотрудникам'),
+    };
+  }
+}
+</script>
+</body>
+</html>
